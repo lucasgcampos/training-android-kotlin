@@ -34,6 +34,10 @@ ext {
     test_runner_version = '1.0.1'
 }
 
+androidExtensions {
+    experimental = true
+}
+
 dependencies {
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
@@ -45,4 +49,5 @@ dependencies {
 
     androidTestImplementation "com.android.support.test:runner:$test_runner_version"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$espresso_version"
+    androidTestImplementation "com.android.support.test.espresso:espresso-intents:$espresso_version"
 }

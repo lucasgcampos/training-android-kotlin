@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import br.concrete.training.data.model.Item;
+import br.concrete.training.data.model.Item2;
 import br.concrete.training.R;
 import br.concrete.training.feature.item.JItemActivity;
 
@@ -53,7 +53,7 @@ public class JHomeActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == itemActivityCode && resultCode == RESULT_OK && data != null && data.hasExtra(ITEM_EXTRAS)) {
-            Item item = data.getParcelableExtra(ITEM_EXTRAS);
+            Item2 item = data.getParcelableExtra(ITEM_EXTRAS);
             adapter.addItem(item);
         }
     }

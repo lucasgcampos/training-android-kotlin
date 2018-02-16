@@ -9,7 +9,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.concrete.training.data.model.Item;
+import br.concrete.training.data.model.Item2;
 import br.concrete.training.R;
 
 import static br.concrete.training.feature.home.Api.*;
@@ -20,7 +20,7 @@ import static br.concrete.training.feature.home.Api.*;
 
 public class JHomeAdapter extends RecyclerView.Adapter<JHomeAdapter.ViewHolder> {
 
-    private List<Item> items = fetchDefaultItems();
+    private List<Item2> items = fetchDefaultItems();
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -38,7 +38,7 @@ public class JHomeAdapter extends RecyclerView.Adapter<JHomeAdapter.ViewHolder> 
         return items != null ? items.size() : 0;
     }
 
-    void addItem(Item item) {
+    void addItem(Item2 item) {
         items.add(item);
         notifyDataSetChanged();
     }
@@ -54,7 +54,7 @@ public class JHomeAdapter extends RecyclerView.Adapter<JHomeAdapter.ViewHolder> 
             description = itemView.findViewById(R.id.description);
         }
 
-        private void bindView(Item item) {
+        private void bindView(Item2 item) {
             task.setText(item.getTask());
             description.setText(item.getDescription());
         }
@@ -63,11 +63,11 @@ public class JHomeAdapter extends RecyclerView.Adapter<JHomeAdapter.ViewHolder> 
 }
 
 final class Api {
-    static ArrayList<Item> fetchDefaultItems() {
-        ArrayList<Item> items = new ArrayList<>();
+    static ArrayList<Item2> fetchDefaultItems() {
+        ArrayList<Item2> items = new ArrayList<>();
 
-        items.add(new Item("Estudar Kotlin", "Estudar a estrutura básica da linguagem"));
-        items.add(new Item("Estudar Dagger2", "Estudar o conceito de injeção de dependência e depois entender como funciona o dagger2 "));
+        items.add(new Item2("Estudar Kotlin", "Estudar a estrutura básica da linguagem"));
+        items.add(new Item2("Estudar Dagger2", "Estudar o conceito de injeção de dependência e depois entender como funciona o dagger2 "));
 
         return items;
     }

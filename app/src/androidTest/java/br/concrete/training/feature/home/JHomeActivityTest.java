@@ -47,7 +47,7 @@ public class JHomeActivityTest {
     }
 
     @Test
-    public void shouldTryCreateItemWithEmptyTask() {
+    public void shouldTryCreateItemWithEmptyTask() throws InterruptedException {
         // given
         activityRule.launchActivity(new Intent());
 
