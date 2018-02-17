@@ -27,7 +27,7 @@ class HomeAdapter : RecyclerView.Adapter<TasksViewHolder>() {
         holder?.bindView(items[position])
     }
 
-    fun incluiItemNaLista(item: Item2) {
+    fun includeItemList(item: Item2) {
         items.add(item)
         notifyDataSetChanged()
     }

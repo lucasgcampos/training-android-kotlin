@@ -55,7 +55,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener {
                 && data != null
                 && data.hasExtra(ITEM_EXTRAS)) {
             val item = data.getParcelableExtra<Item2>(ITEM_EXTRAS)
-            homeAdapter.incluiItemNaLista(item)
+            homeAdapter.includeItemList(item)
         }
     }
 }

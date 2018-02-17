@@ -8,16 +8,17 @@ import android.support.test.espresso.action.ViewActions.click
 import android.support.test.espresso.action.ViewActions.replaceText
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.intent.Intents
-import android.support.test.espresso.intent.matcher.ComponentNameMatchers
-import android.support.test.espresso.intent.matcher.IntentMatchers
+import android.support.test.espresso.intent.Intents.intended
+import android.support.test.espresso.intent.matcher.ComponentNameMatchers.hasClassName
+import android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent
 import android.support.test.espresso.intent.rule.IntentsTestRule
 import android.support.test.espresso.matcher.ViewMatchers.*
-import android.support.test.rule.ActivityTestRule
 import br.concrete.training.R
 import br.concrete.training.data.model.Item
 import br.concrete.training.feature.item.ItemActivity
 import org.junit.Rule
 import org.junit.Test
+
 
 /**
  * Created by eliete on 2/16/18.
@@ -39,62 +40,34 @@ class ItemActivityTest {
 
 
     @Test
-    fun whenCreateCompleteTask_shouldShowExpectedTaskWithSuccess() {
-        activityRule.launchActivity(Intent())
-
-        onView(withId(R.id.task)).perform(replaceText(TITLE))
-        onView(withId(R.id.description)).perform(replaceText(DESCRIPTION))
-        Thread.sleep(800)
-        onView(withId(R.id.add_item)).perform(click())
-
-        onView(withText(TITLE)).check(matches(isDisplayed()))
-        onView(withText(DESCRIPTION)).check(matches(isDisplayed()))
-    }
-
-    @Test
-    fun whenCreateATask_withNoDescription_shouldShowDescriptionTaskWithHifen() {
-        activityRule.launchActivity(Intent())
-
-        onView(withId(R.id.task)).perform(replaceText(TITLE))
-        onView(withId(R.id.description)).perform(replaceText(EMPTY_STRING))
-        Thread.sleep(800)
-        onView(withId(R.id.add_item)).perform(click())
-
-        onView(withText(TITLE)).check(matches(isDisplayed()))
-        onView(withText(DEFAULT_EMPTY_DESCRIPTION)).check(matches(isDisplayed()))
-    }
-
-    @Test
     fun whenTryToCreateAnEmptyTask_shouldShowDialog() {
         activityRule.launchActivity(Intent())
 
         onView(withId(R.id.task)).perform(replaceText(EMPTY_STRING))
         onView(withId(R.id.description)).perform(replaceText(DESCRIPTION))
-        Thread.sleep(800)
+        Thread.sleep(500)
         onView(withId(R.id.add_item)).perform(click())
 
         onView(withText(DIALOG_TITLE)).check(matches(isDisplayed()))
     }
 
     @Test
-    fun whenClickToCreateTask_shouldHomeIntentWasFired() {
+    fun whenClickToCreateTask_shouldHomeIntentFired() {
         var intent = Intent()
         intent.putExtra(HomeActivity.ITEM_EXTRAS, Item(TITLE, DESCRIPTION))
 
         activityRule.launchActivity(Intent())
 
-        Intents.intending(IntentMatchers.hasComponent(
-                ComponentNameMatchers.hasClassName(HomeActivity::class.java.name)))
+        Intents.intending(hasComponent(
+                hasClassName(HomeActivity::class.java.name)))
                 .respondWith(Instrumentation.ActivityResult(Activity.RESULT_OK, intent))
 
         onView(withId(R.id.task)).perform(replaceText(TITLE))
         onView(withId(R.id.description)).perform(replaceText(DESCRIPTION))
 
-        Thread.sleep(800)
+        Thread.sleep(500)
         onView(withId(R.id.add_item)).perform(click())
 
-        onView(withText(TITLE)).check(matches(isDisplayed()))
-        onView(withText(DESCRIPTION)).check(matches(isDisplayed()))
-
+        intended(hasComponent(hasClassName(HomeActivity::class.java.name)))
     }
 }
