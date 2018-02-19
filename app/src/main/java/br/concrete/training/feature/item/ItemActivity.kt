@@ -21,7 +21,7 @@ class ItemActivity : AppCompatActivity(), View.OnClickListener {
     private var description: TextInputEditText? = null
 
     override fun onClick(p0: View?) {
-        if (getItem() != null) {
+        if (validateTaskItem(getItem())) {
             setResult(RESULT_OK, Intent().putExtra(HomeActivity.ITEM_EXTRAS, getItem()))
             finish()
         } else {
@@ -43,18 +43,13 @@ class ItemActivity : AppCompatActivity(), View.OnClickListener {
         fab?.setOnClickListener(this)
     }
 
-    fun getItem(): Item2? {
+    private fun getItem() : Item2 {
         val taskItem = task?.text.toString()
-
-        return if (validateTaskItem(taskItem)) {
-            Item2(taskItem, getDescriptionItem())
-        } else {
-            null
-        }
+        return Item2(taskItem, getDescriptionItem())
     }
 
-    fun validateTaskItem(task : String): Boolean {
-        return !task.isEmpty()
+    fun validateTaskItem(item : Item2): Boolean {
+        return !item.task.isEmpty()
     }
 
     fun getDescriptionItem() : String {

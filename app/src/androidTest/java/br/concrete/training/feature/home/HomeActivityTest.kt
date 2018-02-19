@@ -32,10 +32,6 @@ class HomeActivityTest {
     fun whenClickToCreateTask_shouldItemIntentIsFired() {
         activityRule.launchActivity(Intent())
 
-        intending(IntentMatchers.hasComponent(
-                ComponentNameMatchers.hasClassName(ItemActivity::class.java.name)))
-                .respondWith(Instrumentation.ActivityResult(Activity.RESULT_OK, Intent()))
-
         onView(withId(R.id.add_item)).perform(click())
 
         Intents.intended(IntentMatchers.hasComponent(
