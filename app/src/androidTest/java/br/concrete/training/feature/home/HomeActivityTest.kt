@@ -7,6 +7,7 @@ import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.action.ViewActions.click
 import android.support.test.espresso.assertion.ViewAssertions
 import android.support.test.espresso.intent.Intents
+import android.support.test.espresso.intent.Intents.intending
 import android.support.test.espresso.intent.matcher.ComponentNameMatchers
 import android.support.test.espresso.intent.matcher.IntentMatchers
 import android.support.test.espresso.intent.rule.IntentsTestRule
@@ -31,7 +32,7 @@ class HomeActivityTest {
     fun whenClickToCreateTask_shouldItemIntentIsFired() {
         activityRule.launchActivity(Intent())
 
-        Intents.intending(IntentMatchers.hasComponent(
+        intending(IntentMatchers.hasComponent(
                 ComponentNameMatchers.hasClassName(ItemActivity::class.java.name)))
                 .respondWith(Instrumentation.ActivityResult(Activity.RESULT_OK, Intent()))
 
@@ -47,11 +48,13 @@ class HomeActivityTest {
 
         activityRule.launchActivity(Intent())
 
-        var intent = Intent()
+        val intent = Intent()
         intent.putExtra(HomeActivity.ITEM_EXTRAS , Item2(ItemActivityTest.TITLE, ItemActivityTest.DESCRIPTION))
-        preparaIntent(intent)
+        montaIntentASerLancada(intent)
 
-        Thread.sleep(1000)
+        montaIntentASerLancada(intent)
+
+        onView(withId(R.id.add_item)).perform(click())
         onView(ViewMatchers.withText(ItemActivityTest.TITLE))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         onView(ViewMatchers.withText(ItemActivityTest.DESCRIPTION))
@@ -62,23 +65,20 @@ class HomeActivityTest {
     fun whenATaskCreated_withNoDescription_shouldShowDescriptionTaskWithHifen() {
         activityRule.launchActivity(Intent())
 
-        var intent = Intent()
+        val intent = Intent()
         intent.putExtra(HomeActivity.ITEM_EXTRAS , Item2(ItemActivityTest.TITLE,
                 ItemActivityTest.DEFAULT_EMPTY_DESCRIPTION))
-
-        preparaIntent(intent)
-
-        Thread.sleep(1000)
+        montaIntentASerLancada(intent)
+        onView(withId(R.id.add_item)).perform(click())
         onView(ViewMatchers.withText(ItemActivityTest.TITLE))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         onView(ViewMatchers.withText(ItemActivityTest.DEFAULT_EMPTY_DESCRIPTION))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 
-    private fun preparaIntent(intent: Intent) {
-        Intents.intending(IntentMatchers.hasComponent(
-                ComponentNameMatchers.hasClassName(ItemActivity::class.java.name)))
-                .respondWith(Instrumentation.ActivityResult(Activity.RESULT_OK, intent))
+    private fun montaIntentASerLancada(intent: Intent) {
+        intending(IntentMatchers.hasComponent(ItemActivity::class.java.name)).respondWith(
+                Instrumentation.ActivityResult(Activity.RESULT_OK, intent))
     }
 
 
