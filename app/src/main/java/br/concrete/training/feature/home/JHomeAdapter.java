@@ -50,8 +50,8 @@ public class JHomeAdapter extends RecyclerView.Adapter<JHomeAdapter.ViewHolder> 
 
         ViewHolder(View itemView) {
             super(itemView);
-            task = itemView.findViewById(R.id.task);
-            description = itemView.findViewById(R.id.description);
+            task = itemView.findViewById(R.id.task_item);
+            description = itemView.findViewById(R.id.description_item);
         }
 
         private void bindView(Item2 item) {

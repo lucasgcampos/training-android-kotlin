@@ -26,11 +26,11 @@ class HomeActivityTest {
 
     @Rule
     @JvmField
-    var activityRule = IntentsTestRule(HomeActivity::class.java, false, false)
+    var rule = IntentsTestRule(HomeActivity::class.java, false, false)
 
     @Test
     fun whenClickToCreateTask_shouldItemIntentIsFired() {
-        activityRule.launchActivity(Intent())
+        rule.launchActivity(Intent())
 
         onView(withId(R.id.add_item)).perform(click())
 
@@ -42,13 +42,13 @@ class HomeActivityTest {
     @Test
     fun whenCompleteTaskCreated_shouldShowExpectedTaskWithSuccess() {
 
-        activityRule.launchActivity(Intent())
+        rule.launchActivity(Intent())
 
         val intent = Intent()
         intent.putExtra(HomeActivity.ITEM_EXTRAS , Item2(ItemActivityTest.TITLE, ItemActivityTest.DESCRIPTION))
-        montaIntentASerLancada(intent)
+        mockIntent(intent)
 
-        montaIntentASerLancada(intent)
+        mockIntent(intent)
 
         onView(withId(R.id.add_item)).perform(click())
         onView(ViewMatchers.withText(ItemActivityTest.TITLE))
@@ -59,12 +59,12 @@ class HomeActivityTest {
 
     @Test
     fun whenATaskCreated_withNoDescription_shouldShowDescriptionTaskWithHifen() {
-        activityRule.launchActivity(Intent())
+        rule.launchActivity(Intent())
 
         val intent = Intent()
         intent.putExtra(HomeActivity.ITEM_EXTRAS , Item2(ItemActivityTest.TITLE,
                 ItemActivityTest.DEFAULT_EMPTY_DESCRIPTION))
-        montaIntentASerLancada(intent)
+        mockIntent(intent)
         onView(withId(R.id.add_item)).perform(click())
         onView(ViewMatchers.withText(ItemActivityTest.TITLE))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
@@ -72,7 +72,7 @@ class HomeActivityTest {
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 
-    private fun montaIntentASerLancada(intent: Intent) {
+    private fun mockIntent(intent: Intent) {
         intending(IntentMatchers.hasComponent(ItemActivity::class.java.name)).respondWith(
                 Instrumentation.ActivityResult(Activity.RESULT_OK, intent))
     }

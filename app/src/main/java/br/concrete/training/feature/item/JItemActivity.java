@@ -48,8 +48,8 @@ public class JItemActivity extends AppCompatActivity {
 
     private void bindViews() {
         fab = findViewById(R.id.add_item);
-        task = findViewById(R.id.task);
-        description = findViewById(R.id.description);
+        task = findViewById(R.id.task_item);
+        description = findViewById(R.id.description_item);
     }
 
     private Item2 getFormItem() {

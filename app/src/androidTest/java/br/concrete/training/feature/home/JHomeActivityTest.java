@@ -37,8 +37,8 @@ public class JHomeActivityTest {
 
         // when
         onView(withId(R.id.add_item)).perform(click());
-        onView(withId(R.id.task)).perform(replaceText(TITLE));
-        onView(withId(R.id.description)).perform(replaceText(DESCRIPTION));
+        onView(withId(R.id.task_item)).perform(replaceText(TITLE));
+        onView(withId(R.id.description_item)).perform(replaceText(DESCRIPTION));
         onView(withId(R.id.add_item)).perform(click());
 
         // then
@@ -53,8 +53,8 @@ public class JHomeActivityTest {
 
         // when
         onView(withId(R.id.add_item)).perform(click());
-        onView(withId(R.id.task)).perform(replaceText(EMPTY_STRING));
-        onView(withId(R.id.description)).perform(replaceText(DESCRIPTION));
+        onView(withId(R.id.task_item)).perform(replaceText(EMPTY_STRING));
+        onView(withId(R.id.description_item)).perform(replaceText(DESCRIPTION));
         onView(withId(R.id.add_item)).perform(click());
 
         // then
@@ -68,8 +68,8 @@ public class JHomeActivityTest {
 
         // when
         onView(withId(R.id.add_item)).perform(click());
-        onView(withId(R.id.task)).perform(replaceText(TITLE));
-        onView(withId(R.id.description)).perform(replaceText(EMPTY_STRING));
+        onView(withId(R.id.task_item)).perform(replaceText(TITLE));
+        onView(withId(R.id.description_item)).perform(replaceText(EMPTY_STRING));
         onView(withId(R.id.add_item)).perform(click());
 
         // then

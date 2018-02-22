@@ -19,9 +19,7 @@ class HomeAdapter : RecyclerView.Adapter<TasksViewHolder>() {
         return TasksViewHolder(layout)
     }
 
-    override fun getItemCount(): Int {
-        return items.size
-    }
+    override fun getItemCount() = items.size
 
     override fun onBindViewHolder(holder: TasksViewHolder?, position: Int) {
         holder?.bindView(items[position])

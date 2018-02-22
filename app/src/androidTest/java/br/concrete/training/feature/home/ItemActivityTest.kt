@@ -1,25 +1,20 @@
 package br.concrete.training.feature.home
 
 import android.app.Activity
-import android.app.Instrumentation
 import android.content.Intent
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.action.ViewActions.click
 import android.support.test.espresso.action.ViewActions.replaceText
 import android.support.test.espresso.assertion.ViewAssertions.matches
-import android.support.test.espresso.intent.Intents
+import android.support.test.espresso.contrib.ActivityResultMatchers.hasResultCode
+import android.support.test.espresso.contrib.ActivityResultMatchers.hasResultData
+import android.support.test.espresso.intent.matcher.IntentMatchers
 import android.support.test.espresso.intent.rule.IntentsTestRule
 import android.support.test.espresso.matcher.ViewMatchers.*
 import br.concrete.training.R
 import br.concrete.training.feature.item.ItemActivity
-import org.hamcrest.core.AllOf
 import org.junit.Rule
 import org.junit.Test
-import android.support.test.espresso.contrib.ActivityResultMatchers.hasResultCode
-import android.support.test.espresso.contrib.ActivityResultMatchers.hasResultData
-import android.support.test.espresso.intent.Intents.intended
-import android.support.test.espresso.intent.Intents.intending
-import android.support.test.espresso.intent.matcher.IntentMatchers
 
 
 /**
@@ -45,8 +40,8 @@ class ItemActivityTest {
     fun whenTryToCreateAnEmptyTask_shouldShowDialog() {
         activityRule.launchActivity(Intent())
 
-        onView(withId(R.id.task)).perform(replaceText(EMPTY_STRING))
-        onView(withId(R.id.description)).perform(replaceText(DESCRIPTION))
+        onView(withId(R.id.task_item)).perform(replaceText(EMPTY_STRING))
+        onView(withId(R.id.description_item)).perform(replaceText(DESCRIPTION))
         Thread.sleep(500)
         onView(withId(R.id.add_item)).perform(click())
 
@@ -57,8 +52,8 @@ class ItemActivityTest {
     fun whenClickToCreateTask_shouldHomeIntentFired() {
         activityRule.launchActivity(Intent())
 
-        onView(withId(R.id.task)).perform(replaceText(TITLE))
-        onView(withId(R.id.description)).perform(replaceText(DESCRIPTION))
+        onView(withId(R.id.task_item)).perform(replaceText(TITLE))
+        onView(withId(R.id.description_item)).perform(replaceText(DESCRIPTION))
         Thread.sleep(500)
         onView(withId(R.id.add_item)).perform(click())
 

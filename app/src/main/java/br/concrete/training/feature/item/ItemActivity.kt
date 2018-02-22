@@ -10,15 +10,16 @@ import android.view.View
 import br.concrete.training.R
 import br.concrete.training.data.model.Item2
 import br.concrete.training.feature.home.HomeActivity
+import kotlinx.android.synthetic.main.activity_item.*
 
 /**
  * Created by eliete on 2/15/18.
  */
 class ItemActivity : AppCompatActivity(), View.OnClickListener {
 
-    private var fab: FloatingActionButton? = null
-    private var task: TextInputEditText? = null
-    private var description: TextInputEditText? = null
+    private lateinit var fab: FloatingActionButton
+    private lateinit var task: TextInputEditText
+    private lateinit var description: TextInputEditText
 
     override fun onClick(p0: View?) {
         if (validateTaskItem(getItem())) {
@@ -36,11 +37,11 @@ class ItemActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     fun bindViews() {
-        fab = findViewById(R.id.add_item)
-        task = this.findViewById(R.id.task)
-        description = findViewById(R.id.description)
+        fab = add_item
+        task = task_item
+        description = description_item
 
-        fab?.setOnClickListener(this)
+        fab.setOnClickListener(this)
     }
 
     private fun getItem() : Item2 {

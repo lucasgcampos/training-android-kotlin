@@ -10,6 +10,7 @@ import android.view.View
 import br.concrete.training.R
 import br.concrete.training.data.model.Item2
 import br.concrete.training.feature.item.ItemActivity
+import kotlinx.android.synthetic.main.activity_home.*
 
 /**
  * Created by eliete on 2/16/18.
@@ -17,12 +18,12 @@ import br.concrete.training.feature.item.ItemActivity
 class HomeActivity : AppCompatActivity(), View.OnClickListener {
 
     companion object {
-        val ITEM_EXTRAS = "ITEM_EXTRAS"
-        val itemActivityCode = 0x123
+        const val ITEM_EXTRAS = "ITEM_EXTRAS"
+        const val itemActivityCode = 0x123
     }
 
-    private var recyclerView: RecyclerView? = null
-    private var fab: FloatingActionButton? = null
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var fab: FloatingActionButton
     private lateinit var homeAdapter: HomeAdapter
 
     override fun onClick(p0: View?) {
@@ -38,22 +39,21 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun initTaskList() {
         homeAdapter = HomeAdapter()
-        recyclerView?.adapter = homeAdapter
-        recyclerView?.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = homeAdapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
     }
 
     private fun bindViews() {
-        recyclerView = findViewById(R.id.recycler_view)
-        fab = findViewById(R.id.add_item)
+        recyclerView = recycler_view
+        fab = add_item
 
-        fab?.setOnClickListener(this)
+        fab.setOnClickListener(this)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == itemActivityCode
                 && resultCode == RESULT_OK
-                && data != null
-                && data.hasExtra(ITEM_EXTRAS)) {
+                && data?.hasExtra(ITEM_EXTRAS) == true) {
             val item = data.getParcelableExtra<Item2>(ITEM_EXTRAS)
             homeAdapter.includeItemList(item)
         }
