@@ -2,21 +2,18 @@ package br.concrete.training.feature.home
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import android.widget.TextView
 import br.concrete.training.data.model.Item2
-import kotlinx.android.synthetic.main.activity_item.view.*
+import kotlinx.android.extensions.LayoutContainer
+import kotlinx.android.synthetic.main.item_home.*
 
 /**
  * Created by eliete on 2/16/18.
  */
-class TasksViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-    private val task: TextView = itemView.task_item
-    private val description: TextView = itemView.description_item
+class TasksViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
 
     fun bindView(item: Item2) {
-        task.text = item.task
-        description.text = item.description
+        task_item.text = item.task
+        description_item.text = item.description
     }
 
 }
