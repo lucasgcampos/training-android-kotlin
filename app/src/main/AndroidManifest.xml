@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".feature.home.JHomeActivity">
+        <activity android:name=".feature.home.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,7 +18,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".feature.item.JItemActivity"
+        <activity android:name=".feature.item.ItemActivity"
             android:windowSoftInputMode="adjustResize" />
 
     </application>

@@ -8,7 +8,7 @@ import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
-import br.concrete.training.data.model.Item;
+import br.concrete.training.data.model.Item2;
 import br.concrete.training.R;
 
 import static br.concrete.training.feature.home.JHomeActivity.ITEM_EXTRAS;
@@ -48,12 +48,12 @@ public class JItemActivity extends AppCompatActivity {
 
     private void bindViews() {
         fab = findViewById(R.id.add_item);
-        task = findViewById(R.id.task);
-        description = findViewById(R.id.description);
+        task = findViewById(R.id.task_item);
+        description = findViewById(R.id.description_item);
     }
 
-    private Item getFormItem() {
-        return new Item(
+    private Item2 getFormItem() {
+        return new Item2(
                 task.getText().toString(),
                 description.getText().toString().isEmpty() ? "-" : description.getText().toString()
         );
